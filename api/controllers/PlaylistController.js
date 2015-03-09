@@ -57,7 +57,7 @@ module.exports = {
 	downloadPlaylistSafe: function(req, res){
 		var params = req.validator([{playlist: 'string'}]);
 		if(!params) return null;
-		var user = 1;
+		var user = req.session.user;
 		params.path = Globals.path + '/' +  user + '/' + params.playlist;
 
 		Playlist.create({groovesharkId: params.playlist, user: user})
