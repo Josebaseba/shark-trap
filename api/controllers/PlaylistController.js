@@ -17,7 +17,7 @@ module.exports = {
 
 		GS.downloadSongByNameAndArtist({
 			name  : params.name,
-			artist: params.artist,
+      artist: params.artist,
 			path  : params.path
 		}).exec({
 
@@ -43,7 +43,7 @@ module.exports = {
 		    });
 
 		    var stream = fs.createReadStream(song);
-		    stream.pipe(res);
+	      stream.pipe(res);
 				stream.on('end', function(){
 					fs.unlink(song, function(err){
 						if(err) sails.log.error('Error removing song: ', song);
@@ -115,7 +115,7 @@ var _compressAndSendLink = function(souce, destination, playlist, user){
 };
 
 var _removeSongs = function(source, playlist, user){
-	Playlist.update({groovesharkId: playlist, user: user}, state.completed)
+	Playlist.update({groovesharkId: playlist, user: user}, {state: 'completed'})
 	.exec(function(err, playlist){
 		require('fs-extra').remove(source, function(err) {
 		  if (err) return console.error(err);
