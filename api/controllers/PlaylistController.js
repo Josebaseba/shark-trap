@@ -54,71 +54,103 @@ module.exports = {
 		});
 	},
 
-	dowloadPlaylistSafe: function(req, res){
+	downloadPlaylistSafe: function(req, res){
 		var params = req.validator([{playlist: 'string'}]);
 		if(!params) return null;
-		var user = req.session.user;
-		params.path = Globals.path + '/' +  user + '/' + playlist;
+		var user = 1;
+		params.path = Globals.path + '/' +  user + '/' + params.playlist;
 
-		GS.downloadPlaylistSave({
-			id  : params.playlist,
-			path: path
-		}).exec({
+		Playlist.create({groovesharkId: params.playlist, user: user})
+		.exec(function(err, playlist){
+			if(err) return res.serverError(err);
 
-			error: function (err){
-				sails.log.error('Playlist Error:', err);
-				// TODO: Send email with the error
-			},
+			GS.downloadPlaylistSave({
+				id  : params.playlist,
+				path: params.path
+			}).exec({
 
-			notFound: function (){
-				var id = req.session.user;
-				sails.sockets.emit(id, 'playlistNotFound', {err: 'Playlist not found'});
-			},
+        error: function (err){
+					sails.log.error('Playlist Error:', err);
+					// TODO: Send email with the error
+					Playlist.update(playlist.id, {state: 'unknow error'}).exec(function(){});
+				},
 
-			downloadLimitExceded: function (){
-				sails.log.error('Error: Not found playlist');
-				var id  = req.session.user;
-				var err = 'Download size exceded, please try again later';
-				sails.sockets.emit(id, 'downloadExceded', {err: 'Playlist not found'});
-			},
+				notFound: function (){
+					var id = req.session.user;
+					sails.sockets.emit(id, 'playlistNotFound', {err: 'Playlist not found'});
+					Playlist.update(playlist.id, {state: 'not found'}).exec(function(){});
+				},
 
-			success: function (){
-				var destination = params.path + '.zip';
-				return _compressAndSendLink(params.path, destination, playlist, user);
-			}
+				downloadLimitExceded: function (){
+					sails.log.error('Error: Not found playlist');
+					var id  = req.session.user;
+					var err = 'Download size exceded, please try again later';
+					sails.sockets.emit(id, 'downloadExceded', {err: 'Playlist not found'});
+					Playlist.update(playlist.id, {state: 'banned'}).exec(function(){});
+				},
+
+				success: function (){
+					var destination = params.path + '.zip';
+					return _compressAndSendLink(params.path, destination, playlist.id, user);
+				}
+
+			});
+
+			return res.ok();
 
 		});
 
-		return res.ok();
+	},
 
+	downloadZip: function(req, res){
+		if(!req.param('token')) return res.badRequest();
+		Playlist.findOne({token: req.param('token')}).exec(function(err, playlist){
+			if(err) return res.serverError();
+			if(!playlist) return res.notFound();
+
+			var fs = require('fs');
+			if(!fs.existsSync(playlist.zipUrl)) return res.notFound();
+			var stat = fs.statSync(playlist.zipUrl);
+			res.writeHead(200, {
+				'Content-Type'       : 'application/zip, application/octet-stream',
+				'Content-Length'     : stat.size,
+				'Content-disposition': 'attachment; filename=' + playlist.groovesharkId + '.zip'
+			});
+
+			var stream = fs.createReadStream(playlist.zipUrl);
+			stream.pipe(res);
+			stream.on('end', function(){
+				fs.unlink(playlist.zipUrl, function(err){
+					if(err) sails.log.error('Error removing zipUrl: ', playlist.zipUrl);
+				});
+			});
+		});
 	}
 
 };
 
-var _compressAndSendLink = function(souce, destination, playlist, user){
+var _compressAndSendLink = function(source, destination, playlist, user){
 	Zip.zip({
 		sources: [source],
 		destination: destination,
 	}).exec({
 
 		error: function (err){
-			var id  = req.session.user;
-			sails.sockets.emit(id, 'zipError', {err: 'Error compressing'});
+			sails.sockets.emit(user, 'zipError', {err: 'Error compressing'});
 			//TODO: Send email
 			sails.log.error('Error Zipping');
 		},
 
 		success: function (result){
-			var id  = req.session.user;
-			sails.sockets.emit(id, 'playlistDownloaded', {link: destination});
-			return _removeSongs(source, playlist, user);
+			//sails.sockets.emit(user, 'playlistDownloaded', {link: destination});
+			return _removeSongs(source, destination, playlist, user);
 		}
 
 	});
 };
 
-var _removeSongs = function(source, playlist, user){
-	Playlist.update({groovesharkId: playlist, user: user}, {state: 'completed'})
+var _removeSongs = function(source, destination, playlist, user){
+	Playlist.update(playlist, {state: 'completed', zipUrl: destination})
 	.exec(function(err, playlist){
 		require('fs-extra').remove(source, function(err) {
 		  if (err) return console.error(err);

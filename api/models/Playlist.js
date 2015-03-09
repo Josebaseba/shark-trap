@@ -14,10 +14,6 @@ module.exports = {
       required: true
     },
 
-    name: {
-      type: 'string'
-    },
-
     groovesharkId: {
       type: 'string',
       required: true
@@ -26,13 +22,36 @@ module.exports = {
     state: {
       type: 'string',
       defaultsTo: 'downloading'
+    },
+
+    zipUrl: {
+      type: 'string'
+    },
+
+    token: {
+      type: 'string'
     }
 
   },
 
+  beforeCreate: function(values, next){
+    values.token = _randomToken();
+    next();
+  },
+
   afterUpdate: function(values, next){
-    if(values.state === 'completed') sails.log('Send email', values);
+    if(values.state === 'completed'){
+      sails.log('Send email with link', values);
+    }
     return next();
   }
 
+};
+
+var _rand = function() {
+  return Math.random().toString(36).substr(2);
+};
+
+var _randomToken = function(){
+  return _rand() + _rand() + _rand();
 };

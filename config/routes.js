@@ -36,7 +36,9 @@ module.exports.routes = {
 
   'POST /login': 'UserController.login',
 
-  'GET /download-song': 'PlaylistController.downloadSong'
+  'GET /download-song'      : 'PlaylistController.downloadSong',
+  'GET /download-playlist'  : 'PlaylistController.downloadPlaylistSafe',
+  'GET /download-zip/:token': 'PlaylistController.downloadZip'
 
   /***************************************************************************
   *                                                                          *
