@@ -85,7 +85,7 @@ module.exports = {
           sails.log.error('Error: Not found playlist');
           var id  = req.session.user;
           var err = 'Download size exceded, please try again later';
-          sails.sockets.emit(id, 'downloadExceded', {err: 'Playlist not found'});
+          sails.sockets.emit(id, 'downloadExceded', {err: err});
           Playlist.update(playlist.id, {state: 'banned'}).exec(function(){});
         },
 
