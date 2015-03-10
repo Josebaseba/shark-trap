@@ -14,6 +14,7 @@ module.exports = {
       if(err) return res.badRequest();
       req.session.authenticated = true;
       req.session.user = user.id;
+      if(user.role === 'admin') req.session.admin = true;
       return res.ok();
     });
   },

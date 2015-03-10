@@ -27,6 +27,11 @@ module.exports = {
       via       : 'user'
     },
 
+    role: {
+      type      : 'string',
+      defaultsTo: 'user'
+    },
+
     toJSON: function() {
       var obj = this.toObject();
       delete this.password;
@@ -41,6 +46,7 @@ module.exports = {
   },
 
   beforeUpdate: function(values, next) {
+    if(values.role) delete values.role;
     if(values.password) hashPassword(values, next);
     else next();
   },
