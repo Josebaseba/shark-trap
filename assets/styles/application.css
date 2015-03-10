@@ -3,6 +3,7 @@ header.main {
   width: 100%;
   position: fixed;
   background-color: #ea4c88;
+  z-index: 5;
 }
 
 h2.app-title {
@@ -21,17 +22,44 @@ span.logout:hover {
   color: #FFF;
 }
 
-.center-header {
-  position: fixed;
-  width: 100%;
-  height: 46px;
-  top: 0;
-}
-
 .header-image {
   height: 40px;
   margin-top: 3px;
   z-index: 10;
   margin-left: 145px;
   position: fixed;
+}
+
+div.clearfix {
+  height: 46px;
+  margin-bottom: 2.5%;
+}
+
+section.options {
+  position: absolute;
+  height: 100%;
+  width : 100%;
+  max-width: 1000px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+section > article {
+  height: 25%;
+  width: 46%;
+  margin-left: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+@media (max-width: 550px) {
+  section > article {
+    height: 30%;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-bottom: 2.5%;
+    display: block;
+  }
 }
