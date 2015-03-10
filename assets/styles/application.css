@@ -1,0 +1,21 @@
+header.main {
+  height: 46px;
+  width: 100%;
+  position: fixed;
+  background-color: #ea4c88;
+}
+
+h2.app-title {
+  margin-top: 10px;
+  font-size: 26px;
+  margin-left: 1em;
+  color: #FFF;
+}
+
+span.logout {
+  margin-top: 10px;
+}
+
+span.logout:hover {
+  color: #FFF;
+}

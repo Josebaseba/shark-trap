@@ -14,6 +14,18 @@
   color: #FFF;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.right {
+  float: right;
+}
+
+.margin-right {
+  margin-right: 1em;
+}
+
 .error-msg {
   color: #ea4c88;
   font-size: 1.1em;
@@ -35,4 +47,8 @@
 
 .no-visibility {
   visibility: hidden;
+}
+
+.bold {
+  font-weight: bold;
 }
