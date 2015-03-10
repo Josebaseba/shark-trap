@@ -7,15 +7,15 @@
 
 module.exports = {
 
-	login: function(req, res){
-		var params = req.validator([{email: 'email'}, 'password']);
-		if(!params) return null;
-		User.login(params, function(err, user){
-			if(err) return res.badRequest();
-			req.session.authenticated = true;
-			req.session.user = user.id;
-			res.redirect('/');
-		});
-	}
+  login: function(req, res){
+    var params = req.validator([{email: 'email'}, 'password']);
+    if(!params) return null;
+    User.login(params, function(err, user){
+      if(err) return res.badRequest();
+      req.session.authenticated = true;
+      req.session.user = user.id;
+      res.redirect('/');
+    });
+  }
 
 };
