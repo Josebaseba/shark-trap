@@ -15,6 +15,8 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'styles/fontawesome.css',
+  'styles/reset.css',
   'styles/**/*.css'
 ];
 
@@ -22,15 +24,16 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  
-  // Load sails.io before everything else
+  'js/dependencies/jquery.min.js',
+  'js/dependencies/underscore.min.js',
+  'js/dependencies/backbone.min.js',
   'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/**/*.js',
-
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
+  'js/dependencies/*.js',
+  'js/app/app.js',
+  'js/app/models/*.js',
+  'js/app/collections/*.js',
+  'js/app/views/*.js',
+  'js/app/routes/router.js',
   'js/**/*.js'
 ];
 

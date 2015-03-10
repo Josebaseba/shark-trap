@@ -1,0 +1,15 @@
+.hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.white {
+  color: #FFF;
+}
