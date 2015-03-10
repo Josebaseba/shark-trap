@@ -11,7 +11,15 @@
 
 module.exports.bootstrap = function(cb) {
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  cb();
+  /* If we don't have users create the initial user */
+  /* USER: */
+  /* email: admin@sharktrap.org | password: sharktrap */
+
+  User.count().exec(function usersCount(err, users){
+    if(err) return cb(err);
+    if(users !== 0) return cb();
+    var user = {email: 'admin@sharktrap.org', password: 'sharktrap'};
+    User.create(user).exec(cb);
+  });
+
 };

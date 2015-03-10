@@ -14,8 +14,23 @@ module.exports = {
       if(err) return res.badRequest();
       req.session.authenticated = true;
       req.session.user = user.id;
-      res.redirect('/');
+      return res.redirect('/');
     });
+  },
+
+  update: function(req, res){
+    var params = req.validator([{email: 'email', password: '?password'}]);
+    if(!params) return null;
+    User.update(req.session.user, params).exec(function(err, user){
+      if(err) return res.serverError(err);
+      if(!user.length) return res.notFound();
+      return res.ok(user[0]);
+    });
+  },
+
+  logout: function(req, res){
+    req.session.destroy();
+    return res.redirect('/');
   }
 
 };

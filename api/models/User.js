@@ -22,6 +22,11 @@ module.exports = {
       required: true
     },
 
+    playlists: {
+      collection: 'playlist',
+      via       : 'user'
+    },
+
     toJSON: function() {
       var obj = this.toObject();
       delete this.password;
