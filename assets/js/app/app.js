@@ -4,6 +4,8 @@ var app = app || {};
 
 app.homepage = !!$('div#homepage').length;
 
+if(app.homepage) $('html').addClass('homepage');
+
 $(function(){
 
   console.log('====================');
