@@ -10,6 +10,7 @@ h2.app-title {
   font-size: 26px;
   margin-left: 1em;
   color: #FFF;
+  position: fixed;
 }
 
 span.logout {
@@ -18,4 +19,19 @@ span.logout {
 
 span.logout:hover {
   color: #FFF;
+}
+
+.center-header {
+  position: fixed;
+  width: 100%;
+  height: 46px;
+  top: 0;
+}
+
+.header-image {
+  height: 40px;
+  margin-top: 3px;
+  z-index: 10;
+  margin-left: 145px;
+  position: fixed;
 }
