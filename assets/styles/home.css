@@ -77,7 +77,6 @@ p {
 
 #homepage form span.big {
   background-color: #363b41;
-  border-radius: 3px 0px 0px 3px;
   color: #606468;
   display: block;
   float: left;
@@ -93,7 +92,6 @@ p {
 
 #homepage form input[type="email"], input[type="password"] {
   background-color: #3b4148;
-  border-radius: 0px 3px 3px 0px;
   color: #FFF;
   margin-bottom: 1em;
   padding: 0 16px;
@@ -101,9 +99,6 @@ p {
 }
 
 #homepage form input[type="button"] {
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   background-color: #ea4c88;
   color: #eee;
   font-weight: bold;
@@ -129,4 +124,17 @@ select:focus,
 textarea:focus,
 button:focus {
     outline: none;
+}
+
+/* LOGO */
+
+.logo {
+  width: 100%;
+}
+
+.title {
+  font-size: 3em;
+  color: #ea4c88;
+  font-weight: bold;
+  margin-top: -.5em;
 }

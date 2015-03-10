@@ -13,3 +13,26 @@
 .white {
   color: #FFF;
 }
+
+.error-msg {
+  color: #ea4c88;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
+.margin-top {
+  margin-top: 1em;
+}
+
+.opacity-bg {
+  padding: .5em;
+  background-color: rgba(255, 255, 255, .4);
+}
+
+.no-visibility {
+  visibility: hidden;
+}

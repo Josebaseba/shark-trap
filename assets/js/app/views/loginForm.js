@@ -13,8 +13,9 @@ $(function(){
       if(!this.$el.length) return null;
       this.listenTo(Backbone, 'showLoginForm', this.showLoginForm);
       this.listenTo(Backbone, 'hideLoginForm', this.hideLoginForm);
-      this.$email    = this.$('input[type=email]');
-      this.$password = this.$('input[type=password]');
+      this.$email      = this.$('input[type=email]');
+      this.$password   = this.$('input[type=password]');
+      this.$loginError = this.$('div.error-msg');
     },
 
     showLoginForm: function(){
@@ -32,11 +33,22 @@ $(function(){
     },
 
     doLogin: function(){
+      this.$loginError.addClass('no-visibility');
       var data = {
         email   : this.$email.val(),
         password: this.$password.val()
       };
-      app.proxy('POST', '/login', data);
+      app.proxy('POST', '/login', data, this.successLogin, this.loginError, this);
+    },
+
+    // MAIN EVENTS
+
+    successLogin: function(){
+      document.location = '/';
+    },
+
+    loginError: function(err){
+      this.$loginError.removeClass('no-visibility');
     }
 
   });

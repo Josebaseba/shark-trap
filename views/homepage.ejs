@@ -4,7 +4,16 @@
 
     <form action="javascript:void(0);">
 
+      <div class="logo-container text-center margin-bottom">
+        <img src="/images/shark-logo.png" class="logo" />
+        <h1 class="title">Shark Trap</h1>
+      </div>
+
       <fieldset data-control="login" class="clearfix">
+
+        <div class="error-msg text-center margin-bottom opacity-bg no-visibility">
+          <span>Invalid email or password</span>
+        </div>
 
         <p>
           <span class="big fontawesome-user"></span>
@@ -26,6 +35,10 @@
       </fieldset>
 
       <fieldset data-control="invitation" class="hidden clearfix">
+
+        <div class="error-msg text-center margin-bottom opacity-bg no-visibility">
+          <span>Email in use</span>
+        </div>
 
         <p>
           <span class="big fontawesome-user"></span>

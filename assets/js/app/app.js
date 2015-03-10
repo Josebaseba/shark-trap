@@ -18,9 +18,11 @@ $(function(){
 
     method = method.toLowerCase();
 
-    io.socket[method](url, data, function(resData){
+    io.socket[method](url, data, function(resData, body){
 
-      console.log(resData);
+      if(body.statusCode >= 300) return onError.call(that, resData, body);
+
+      return onSuccess.call(that, resData, body);
 
     });
 

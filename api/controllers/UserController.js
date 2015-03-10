@@ -14,7 +14,7 @@ module.exports = {
       if(err) return res.badRequest();
       req.session.authenticated = true;
       req.session.user = user.id;
-      return res.redirect('/');
+      return res.ok();
     });
   },
 
