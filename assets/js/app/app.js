@@ -4,7 +4,7 @@ var app = app || {};
 
 app.homepage = !!$('div#homepage').length;
 
-if(app.homepage) $('html').addClass('homepage');
+if(app.homepage) $('html').addClass('homepage'); else $('body').addClass('app');
 
 $(function(){
 
