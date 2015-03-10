@@ -47,19 +47,60 @@ section.options {
   transform: translate(-50%, -50%);
 }
 
-section > article {
+section.options > article {
+  position: relative;
+  float: left;
   height: 25%;
   width: 46%;
   margin-left: 2.5%;
   margin-bottom: 2.5%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-@media (max-width: 550px) {
-  section > article {
+section.options > article > span:hover {
+  color: #FFF !important;
+  text-shadow: 3px 3px #ea4c88 !important;
+}
+
+section.options > article.songs {
+  background: url(/images/shark-1.jpg) no-repeat center center;
+}
+
+section.options > article.playlist {
+  background: url(/images/shark-2.jpg) no-repeat center center;
+}
+
+section.options > article.my-playlist {
+  background: url(/images/shark-3.jpg) no-repeat center center;
+}
+
+section.options > article.config {
+  background: url(/images/shark-4.jpg) no-repeat center center;
+}
+
+section.options > article > span.explanation {
+  font-size: 4em;
+  font-weight: bold;
+  color: #ea4c88;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 90%;
+  padding-top: 20px;
+  text-shadow: 3px 3px #FFF;
+}
+
+@media (max-width: 700px) {
+  section.options > article {
     height: 30%;
     width: 95%;
     margin-left: 2.5%;
     margin-bottom: 2.5%;
-    display: block;
+    display: block !important;
   }
+
 }
