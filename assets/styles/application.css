@@ -31,10 +31,6 @@ span.logout {
   margin-top: 10px;
 }
 
-span.logout:hover {
-  text-shadow: 2px 2px #000 !important;
-}
-
 .header-image {
   height: 40px;
   margin-top: 3px;
@@ -64,6 +60,7 @@ section.options > article {
   position: relative;
   float: left;
   height: 25%;
+  min-height: 250px;
   width: 46%;
   margin-left: 2.5%;
   margin-bottom: 2.5%;
