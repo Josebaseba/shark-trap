@@ -71,11 +71,11 @@ section.options > article {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  border: 5px solid #363b41;
 }
 
-section.options > article > span:hover {
-  color: #FFF !important;
-  text-shadow: 3px 3px #ea4c88 !important;
+section.options > article:hover {
+  border: 5px solid #3b4148;
 }
 
 section.options > article.songs {
@@ -102,12 +102,17 @@ section.options > article > span.explanation {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 90%;
-  padding-top: 20px;
+  height: 100%;
+  padding-top: 30px;
   text-shadow: 3px 3px #FFF;
 }
 
-@media (max-width: 700px) {
+section.options > article > span.explanation:hover {
+  color: #FFF;
+  text-shadow: 3px 3px #ea4c88;
+}
+
+@media (max-width: 900px) {
   section.options > article {
     height: 30%;
     width: 95%;
