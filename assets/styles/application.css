@@ -44,7 +44,7 @@ div.clearfix {
   margin-bottom: 2.5%;
 }
 
-section.options {
+section {
   position: absolute;
   height: 100%;
   width : 100%;
@@ -56,7 +56,7 @@ section.options {
   transform: translate(-50%, -50%);
 }
 
-section.options > article {
+section.options article {
   position: relative;
   float: left;
   height: 25%;
@@ -71,27 +71,27 @@ section.options > article {
   border: 5px solid #363b41;
 }
 
-section.options > article:hover {
+section.options article:hover {
   border: 5px solid #3b4148;
 }
 
-section.options > article.songs {
+section.options article.songs {
   background: url(/images/shark-1.jpg) no-repeat center center;
 }
 
-section.options > article.playlist {
+section.options article.playlist {
   background: url(/images/shark-2.jpg) no-repeat center center;
 }
 
-section.options > article.my-playlist {
+section.options article.my-playlist {
   background: url(/images/shark-3.jpg) no-repeat center center;
 }
 
-section.options > article.profile {
+section.options article.profile {
   background: url(/images/shark-4.jpg) no-repeat center center;
 }
 
-section.options > article > span.explanation {
+section.options article > span.explanation {
   font-size: 4em;
   font-weight: bold;
   color: #ea4c88;
@@ -104,13 +104,13 @@ section.options > article > span.explanation {
   text-shadow: 3px 3px #FFF;
 }
 
-section.options > article > span.explanation:hover {
+section.options article > span.explanation:hover {
   color: #FFF;
   text-shadow: 3px 3px #ea4c88;
 }
 
 @media (max-width: 900px) {
-  section.options > article {
+  section.options article {
     height: 30%;
     width: 95%;
     margin-left: 2.5%;

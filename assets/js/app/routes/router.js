@@ -26,6 +26,7 @@ $(function(){
 
       showHome: function(){
         this.navigate('!/', {trigger: true, replace: true});
+        this.showLoginModal();
       }
 
     });
@@ -49,6 +50,7 @@ $(function(){
 
       addHash: function(){
         this.navigate('!/', {trigger: true, replace: true});
+        this.showHome();
       },
 
       showHome: function(){
@@ -57,7 +59,7 @@ $(function(){
       },
 
       downloadSong: function(){
-        Backbone.trigger('hideSections', 'songs');
+        Backbone.trigger('hideSections', 'song');
         Backbone.trigger('showDownloadSong');
       },
 
@@ -84,6 +86,5 @@ $(function(){
 
   app.router = new Router();
   Backbone.history.start();
-  app.router.navigate('!/', {trigger: true, replace: true});
 
 });

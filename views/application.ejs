@@ -1,8 +1,9 @@
 <header class="main">
 
-  <h2 class="app-title inline-block">Shark<span class="bold">Trap</span></h2>
-
-  <img src="/images/shark-logo.png" class="header-image" alt="shark logo" />
+  <a href="#!/">
+    <h2 class="app-title inline-block">Shark<span class="bold">Trap</span></h2>
+    <img src="/images/shark-logo.png" class="header-image" alt="shark logo" />
+  </a>
 
   <span class="hover bold logout inline-block right margin-right">
     <a href="/logout" class="no-style">Logout</a>
@@ -10,48 +11,62 @@
 
 </header>
 
-<section class="options">
+<section id="home" class="options">
 
   <div class="clearfix"></div>
 
-  <article class="songs  opacity-bg hover">
-    <span class="explanation text-center">
-      <p>
-        Download
-        <br>
-        Songs
-      </p>
-    </span>
-  </article>
+  <a href="#!/download-song">
+    <article class="songs opacity-bg hover">
+      <span class="explanation text-center">
+        <p>
+          Download
+          <br>
+          Songs
+        </p>
+      </span>
+    </article>
+  </a>
 
-  <article class="playlist  opacity-bg hover">
-    <span class="explanation text-center">
-      <p>
-        Download
-        <br>
-        Playlists
-      </p>
-    </span>
-  </article>
+  <a href="#!/download-playlist">
+    <article class="playlist opacity-bg hover">
+      <span class="explanation text-center">
+        <p>
+          Download
+          <br>
+          Playlists
+        </p>
+      </span>
+    </article>
+  </a>
 
-  <article class="my-playlist  opacity-bg hover">
-    <span class="explanation text-center">
-      <p>
-        Check My
-        <br>
-        Playlists
-      </p>
-    </span>
-  </article>
+  <a href="#!/playlists">
+    <article class="my-playlist opacity-bg hover">
+      <span class="explanation text-center">
+        <p>
+          Check My
+          <br>
+          Playlists
+        </p>
+      </span>
+    </article>
+  </a>
 
-  <article class="profile opacity-bg hover">
-    <span class="explanation text-center">
-      <p>
-        My
-        <br>
-        Profile
-      </p>
-    </span>
-  </article>
+  <a href="#!/profile">
+    <article class="profile opacity-bg hover">
+      <span class="explanation text-center">
+        <p>
+          My
+          <br>
+          Profile
+        </p>
+      </span>
+    </article>
+  </a>
+
+</section>
+
+<section id="download-song" class="hidden">
+
+  <div class="clearfix"></div>
 
 </section>

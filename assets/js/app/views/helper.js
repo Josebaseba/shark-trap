@@ -13,18 +13,18 @@ $(function(){
     el: $('body.app'),
 
     initialize: function(){
-      this.$home        = this.$('section.options');
-      this.$songs       = this.$('section.songs');
-      this.$playlist    = this.$('section.playlist');
-      this.$myPlaylists = this.$('section.my-playlists');
-      this.$profile     = this.$('section.profile');
+      this.$home        = this.$('section#home');
+      this.$song        = this.$('section#download-song');
+      this.$playlist    = this.$('section#download-playlist');
+      this.$myPlaylists = this.$('section#playlists');
+      this.$profile     = this.$('section#profile');
       this.listenTo(Backbone, 'hideSections', this.hideSections);
     },
 
     hideSections: function(section){
       console.log(section);
       if(section !== 'home') this.$home.addClass('hidden');
-      if(section !== 'songs') this.$songs.addClass('hidden');
+      if(section !== 'song') this.$song.addClass('hidden');
       if(section !== 'playlist') this.$playlist.addClass('hidden');
       if(section !== 'myPlaylists') this.$myPlaylists.addClass('hidden');
       if(section !== 'profile') this.$profile.addClass('hidden');
