@@ -54,6 +54,7 @@ section {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 section.options article {
@@ -109,6 +110,13 @@ section.options article > span.explanation:hover {
   text-shadow: 3px 3px #ea4c88;
 }
 
+img.logo-bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 0;
+}
+
 @media (max-width: 900px) {
   section.options article {
     height: 30%;
@@ -116,6 +124,10 @@ section.options article > span.explanation:hover {
     margin-left: 2.5%;
     margin-bottom: 2.5%;
     display: block !important;
+  }
+
+  img.logo-bottom {
+    display:none;
   }
 
 }
