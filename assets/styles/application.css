@@ -117,6 +117,43 @@ img.logo-bottom {
   z-index: 0;
 }
 
+form span.big {
+  background-color: #363b41;
+  color: #606468;
+  display: block;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 50px;
+}
+
+form input[type=text], form input[type=button] {
+  height: 50px;
+  width : 300px;
+}
+
+form input{
+  background-color: #3b4148;
+  color: #FFF;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  width: 230px;
+}
+
+form input[type="button"] {
+  background-color: #ea4c88;
+  color: #eee;
+  font-weight: bold;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  width: 280px;
+}
+
+form input[type="button"]:hover {
+  background-color: #d44179;
+}
+
 @media (max-width: 900px) {
   section.options article {
     height: 30%;

@@ -30,12 +30,6 @@
   margin-right: 1em;
 }
 
-.error-msg {
-  color: #ea4c88;
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
 .margin-bottom {
   margin-bottom: 1em;
 }
@@ -54,5 +48,11 @@
 }
 
 .bold {
+  font-weight: bold;
+}
+
+.error-msg {
+  color: #ea4c88;
+  font-size: 1.1em;
   font-weight: bold;
 }
