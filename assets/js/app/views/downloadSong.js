@@ -39,7 +39,6 @@ $(function(){
     },
 
     downloadSong: function(){
-      console.log('dwnload song');
       if(this.$preDownload.attr('disabled') === true) return null;
       this.$error.addClass('no-visibility');
       var params = this._checkForm();
@@ -52,7 +51,6 @@ $(function(){
     // Main Methods
 
     songDownloaded: function(song){
-      console.log(song);
       var url = '/download-song/' + song.token;
       this.$preDownload.addClass('hidden').val('Download');
       this.$download
@@ -78,7 +76,6 @@ $(function(){
 
     errorDownloading: function(err){
       this.$preDownload.attr('disabled', false).val('Download');
-      console.log(err);
       if(err.status === 404) return this._showError('Song not found...');
     },
 
