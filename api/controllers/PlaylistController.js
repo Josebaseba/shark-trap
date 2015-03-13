@@ -10,50 +10,6 @@ var Zip = require('machinepack-zip');
 
 module.exports = {
 
-  downloadSong: function(req, res){
-    var params = req.validator([{name: 'string', artist: 'string'}]);
-    if(!params) return null;
-    params.path = Globals.path + '/' +  req.session.user;
-
-    GS.downloadSongByNameAndArtist({
-      name  : params.name,
-      artist: params.artist,
-      path  : params.path
-    }).exec({
-
-      error: function (err){
-        return res.send(400, err);
-      },
-
-      notFound: function (){
-        return res.notFound();
-      },
-
-      downloadLimitExceded: function (){
-        return res.forbidden('Download limit exceded');
-      },
-
-      success: function (song){
-        var fs = require('fs');
-        var stat = fs.statSync(song);
-        res.writeHead(200, {
-          'Content-Type'       : 'audio/mpeg',
-          'Content-Length'     : stat.size,
-          'Content-disposition': 'attachment; filename=' + params.name + '.mp3'
-        });
-
-        var stream = fs.createReadStream(song);
-        stream.pipe(res);
-        stream.on('end', function(){
-          fs.unlink(song, function(err){
-            if(err) sails.log.error('Error removing song: ', song);
-          });
-        });
-      }
-
-    });
-  },
-
   downloadPlaylistSafe: function(req, res){
     var params = req.validator([{playlist: 'string'}]);
     if(!params) return null;
@@ -103,7 +59,6 @@ module.exports = {
   },
 
   downloadZip: function(req, res){
-    if(!req.param('token')) return res.badRequest();
     Playlist.findOne({token: req.param('token')}).exec(function(err, playlist){
       if(err) return res.serverError();
       if(!playlist) return res.notFound();
