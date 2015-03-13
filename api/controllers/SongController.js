@@ -74,6 +74,7 @@ var _downloadSong = function(res, song){
   stream.on('end', function(){
     fs.unlink(song.url, function(err){
       if(err) sails.log.error('Error removing song: ', song.name);
+      Song.update(song.id, {state: 'completed'}).exec(function(){});
     });
   });
 };
