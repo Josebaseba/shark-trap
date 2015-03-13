@@ -9,7 +9,12 @@ $(function(){
     },
 
     initialize: function(){
+      this.listenTo(Backbone, 'hideSections', this.hideSections);
       this.listenTo(Backbone, 'showHome', this.showHome);
+    },
+
+    hideSections: function(section){
+      if(section !== 'home') this.$el.addClass('hidden');
     },
 
     showHome: function(){
