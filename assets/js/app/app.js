@@ -14,9 +14,9 @@ $(function(){
 
   // SOCKETS PROXY
 
-  app.proxy = function(method, url, data, onSuccess, onError, ctx){
+  app.SProxy = function(method, url, data, onSuccess, onError, context){
 
-    var that = ctx || this;
+    var that = context || this;
 
     method = method.toLowerCase();
 
@@ -29,6 +29,23 @@ $(function(){
     });
 
   };
+
+  // HTTP Proxy
+
+  app.proxy = function(method, url, data, onSuccess, onError, context){
+
+    $.ajax({
+      method : method,
+      url    : url,
+      data   : data,
+      context: context
+    }).done(function(res){
+      return onSuccess.call(this, res);
+    }).error(function(err){
+      return onError.call(this, err);
+    });
+
+  }
 
 
 });

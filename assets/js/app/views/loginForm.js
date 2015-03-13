@@ -38,7 +38,7 @@ $(function(){
         email   : this.$email.val(),
         password: this.$password.val()
       };
-      app.proxy('POST', '/login', data, this.successLogin, this.loginError, this);
+      app.SProxy('POST', '/login', data, this.successLogin, this.loginError, this);
     },
 
     // MAIN EVENTS

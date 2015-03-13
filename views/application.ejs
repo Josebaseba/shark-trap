@@ -73,20 +73,24 @@
 
   <article class="song">
 
-    <h2 class="margin-bottom margin-top title">Download Song</h2>
+    <h2 class=" margin-top margin-bottom title">Download Song</h2>
 
     <form>
 
+      <div class="error-msg inline-block text-center margin-bottom margin-bottom opacity-bg no-visibility">
+        <span>Song name and artist required.</span>
+      </div>
+
       <p>
-        <input type="text" value="" placeholder="Song name" novalidate>
+        <input type="text" id="song-name" value="" placeholder="Song name">
       </p>
 
       <p>
-        <input type="text" value="" placeholder="Group" novalidate>
+        <input type="text" id="song-artist" value="" placeholder="Group">
       </p>
 
       <p>
-        <input data-action="download" class="hover margin-top" type="button" value="Download!" novalidate>
+        <input data-action="download" class="hover margin-top" type="button" value="Download!">
       </p>
 
       <p class="hover text-center">
