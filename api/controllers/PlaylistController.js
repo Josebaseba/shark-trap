@@ -77,6 +77,7 @@ module.exports = {
       stream.on('end', function(){
         fs.unlink(playlist.zipUrl, function(err){
           if(err) sails.log.error('Error removing zipUrl: ', playlist.zipUrl);
+          Playlist.update(playlist.id, {state: 'completed'}).exec(function(){});
         });
       });
     });
@@ -105,7 +106,7 @@ var _compressAndSendLink = function(source, destination, playlist, user){
 };
 
 var _removeSongs = function(source, destination, playlist, user){
-  Playlist.update(playlist, {state: 'completed', zipUrl: destination})
+  Playlist.update(playlist, {state: 'ready', zipUrl: destination})
   .exec(function(err, playlist){
     require('fs-extra').remove(source, function(err) {
       if (err) return console.error(err);

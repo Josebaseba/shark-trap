@@ -77,7 +77,7 @@
 
     <form>
 
-      <div class="error-msg inline-block text-center margin-bottom margin-bottom opacity-bg no-visibility">
+      <div class="error-msg inline-block text-center margin-bottom margin-bottom no-visibility">
         <span>Song name and artist required.</span>
       </div>
 
@@ -86,11 +86,15 @@
       </p>
 
       <p>
-        <input type="text" id="song-artist" value="" placeholder="Group">
+        <input type="text" id="song-artist" value="" placeholder="Artist">
       </p>
 
       <p>
-        <input data-action="download" class="hover margin-top" type="button" value="Download!">
+        <input data-action="prepare-download" class="hover margin-top" type="button" value="Download!">
+
+        <a href="javascript:void(0)" class="hidden" data-action="download">
+          <input class="hover margin-top" type="button" value="Click here to download!">
+        </a>
       </p>
 
       <p class="hover text-center">

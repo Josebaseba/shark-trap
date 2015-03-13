@@ -37,7 +37,8 @@ module.exports = {
           user  : req.session.user,
           name  : params.name,
           artist: params.artist,
-          url   : songUrl
+          url   : songUrl,
+          state : 'ready'
         };
         Song.create(song).exec(function(err, song){
           if(err || !song) return res.serverError();

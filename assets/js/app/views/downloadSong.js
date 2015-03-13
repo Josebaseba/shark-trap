@@ -5,8 +5,9 @@ $(function(){
     el: $('section#download-song'),
 
     events: {
-      'keypress input'                   : 'keyPressed',
-      'click input[data-action=download]': 'downloadSong'
+      'keypress input'                           : 'keyPressed',
+      'click a[data-action=download]'            : 'saveSong',
+      'click input[data-action=prepare-download]': 'downloadSong'
     },
 
     initialize: function(){
@@ -16,7 +17,8 @@ $(function(){
       this.$name     = this.$('input#song-name');
       this.$artist   = this.$('input#song-artist');
       this.$error    = this.$('div.error-msg');
-      this.$download = this.$('input[data-action=download]');
+      this.$download = this.$('a[data-action=download]');
+      this.$preDownload = this.$('input[data-action=prepare-download]');
     },
 
     hideSections: function(section){
@@ -31,14 +33,18 @@ $(function(){
     // User Events
 
     keyPressed: function(event){
-      if(event.keyCode === 13) return this.downloadSong();
+      if(event.keyCode === 13){
+        if(!this.$preDownload.hasClass('hidden')) return this.downloadSong();
+      }
     },
 
     downloadSong: function(){
+      console.log('dwnload song');
+      if(this.$preDownload.attr('disabled') === true) return null;
       this.$error.addClass('no-visibility');
       var params = this._checkForm();
       if(!params) return this._showError('Song name and artist required.');
-      this.$download.attr('disabled', true).text('Downloading...');
+      this.$preDownload.attr('disabled', true).val('Downloading...');
       app.proxy('GET', 'download-song', params,
                 this.songDownloaded, this.errorDownloading, this);
     },
@@ -47,11 +53,33 @@ $(function(){
 
     songDownloaded: function(song){
       console.log(song);
+      var url = '/download-song/' + song.token;
+      this.$preDownload.addClass('hidden').val('Download');
+      this.$download
+          .attr('disabled', false).attr('href', url).removeClass('hidden');
+    },
+
+    saveSong: function(event){
+      if(this.$download.attr('disabled')){
+        event.preventDefault();
+        return null;
+      }
+      var $download = this.$download;
+      $download.attr('disabled', true)
+               .find('input').val('Saving in your computer...');
+      var $preDownload = this.$preDownload;
+      setTimeout(function(){
+        $download.addClass('hidden').attr('disabled', false)
+                 .attr('href', 'javascript:void(0)')
+                 .find('input').val('Click here to download!');
+        $preDownload.removeClass('hidden').attr('disabled', false);
+      }, 2000);
     },
 
     errorDownloading: function(err){
-      this.$download.attr('disabled', false).text('Download');
+      this.$preDownload.attr('disabled', false).val('Download');
       console.log(err);
+      if(err.status === 404) return this._showError('Song not found...');
     },
 
     // Pseudo Private
