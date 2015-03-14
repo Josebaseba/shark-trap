@@ -44,7 +44,7 @@ $(function(){
       var params = this._checkForm();
       if(!params) return this._showError('Song name and artist required.');
       this.$preDownload.attr('disabled', true).val('Downloading...');
-      app.proxy('GET', 'download-song', params,
+      app.proxy('GET', '/download-song', params,
                 this.songDownloaded, this.errorDownloading, this);
     },
 
@@ -104,6 +104,5 @@ $(function(){
   });
 
   var downloadSong = new DownloadSong();
-
 
 });

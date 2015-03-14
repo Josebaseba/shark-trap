@@ -26,22 +26,14 @@ module.exports = {
       }).exec({
 
         error: function (err){
-          sails.log.error('Playlist Error:', err);
-          // TODO: Send email with the error
           Playlist.update(playlist.id, {state: 'unknow error'}).exec(function(){});
         },
 
         notFound: function (){
-          var id = req.session.user;
-          sails.sockets.emit(id, 'playlistNotFound', {err: 'Playlist not found'});
           Playlist.update(playlist.id, {state: 'not found'}).exec(function(){});
         },
 
         downloadLimitExceded: function (){
-          sails.log.error('Error: Not found playlist');
-          var id  = req.session.user;
-          var err = 'Download size exceded, please try again later';
-          sails.sockets.emit(id, 'downloadExceded', {err: err});
           Playlist.update(playlist.id, {state: 'banned'}).exec(function(){});
         },
 
@@ -92,13 +84,10 @@ var _compressAndSendLink = function(source, destination, playlist, user){
   }).exec({
 
     error: function (err){
-      sails.sockets.emit(user, 'zipError', {err: 'Error compressing'});
-      //TODO: Send email
       sails.log.error('Error Zipping');
     },
 
     success: function (result){
-      //sails.sockets.emit(user, 'playlistDownloaded', {link: destination});
       return _removeSongs(source, destination, playlist, user);
     }
 
@@ -109,7 +98,7 @@ var _removeSongs = function(source, destination, playlist, user){
   Playlist.update(playlist, {state: 'ready', zipUrl: destination})
   .exec(function(err, playlist){
     require('fs-extra').remove(source, function(err) {
-      if (err) return console.error(err);
+      if (err) return sails.log.error(err);
     })
   });
 };
