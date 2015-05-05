@@ -1,5 +1,4 @@
 # sharkTrap
 
-a [Sails](http://sailsjs.org) application
-
-THEME: #506fd4
+####NOT WORKING ANY MORE :( 
+#####more info -> http://grooveshark.com
